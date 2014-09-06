@@ -50,6 +50,21 @@ dec_be32(const void *buf)
 }
 
 void
+enc_be16(void *buf, uint16_t num)
+{
+    uint8_t *p = buf;
+    *p = (num >> 8) & 0xff;
+    *(p + 1) = num & 0xff;
+}
+
+uint16_t
+dec_be16(const void *buf)
+{
+    const uint8_t *p = buf;
+    return (uint16_t)*p << 8 | *(p + 1);
+}
+
+void
 enc_be64(void *buf, uint64_t num)
 {
     uint8_t *p = buf;

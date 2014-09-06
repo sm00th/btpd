@@ -12,8 +12,10 @@
 
 void *memfind(const void *sub, size_t sublen, const void *mem, size_t memlen);
 
+uint16_t dec_be16(const void *buf);
 uint32_t dec_be32(const void *buf);
 uint64_t dec_be64(const void *buf);
+void enc_be16(void *buf, uint16_t num);
 void enc_be32(void *buf, uint32_t num);
 void enc_be64(void *buf, uint64_t num);
 

@@ -307,6 +307,7 @@ peer_create_common(int sd)
 {
     struct peer *p = btpd_calloc(1, sizeof(*p));
 
+    p->dht_enabled = 0;
     p->mp = mp_create();
     mp_hold(p->mp);
     p->mp->p = p;

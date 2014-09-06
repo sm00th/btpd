@@ -217,9 +217,18 @@ struct net_buf *
 nb_create_shake(struct torrent *tp)
 {
     struct net_buf *out = nb_create_alloc(NB_SHAKE, 68);
-    bcopy("\x13""BitTorrent protocol\0\0\0\0\0\0\0\0", out->buf, 28);
+    bcopy("\x13""BitTorrent protocol\0\0\0\0\0\0\0\x01", out->buf, 28);
     bcopy(tp->tl->hash, out->buf + 28, 20);
     bcopy(btpd_get_peer_id(), out->buf + 48, 20);
+    return out;
+}
+
+struct net_buf *
+nb_create_port(void)
+{
+    struct net_buf *out = nb_create_alloc(NB_PORT, 3);
+    bcopy("\x09", out->buf, 1);
+    enc_be16(out->buf + 1, net_port);
     return out;
 }
 

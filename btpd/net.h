@@ -10,6 +10,7 @@
 #define MSG_REQUEST     6
 #define MSG_PIECE       7
 #define MSG_CANCEL      8
+#define MSG_PORT        9
 
 #define RATEHISTORY 20
 

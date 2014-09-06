@@ -273,6 +273,10 @@ net_dispatch_msg(struct peer *p, const char *buf)
         length = p->in.msg_len - 9;
         peer_on_piece(p, p->in.pc_index, p->in.pc_begin, length, buf);
         break;
+    case MSG_PORT:
+        p->dht_port = dec_be16(buf);
+        length = p->in.msg_len - 2;
+        break;
     default:
         abort();
     }
@@ -289,6 +293,8 @@ net_mh_ok(struct peer *p)
     case MSG_INTEREST:
     case MSG_UNINTEREST:
         return mlen == 1;
+    case MSG_PORT:
+        return mlen == 3;
     case MSG_HAVE:
         return mlen == 5;
     case MSG_BITFIELD:
@@ -319,6 +325,9 @@ net_state(struct peer *p, const char *buf)
     case SHAKE_PSTR:
         if (bcmp(buf, "\x13""BitTorrent protocol", 20) != 0)
             goto bad;
+        if (*(buf+27) & 0x1) {
+            p->dht_enabled = 1;
+        }
         peer_set_in_state(p, SHAKE_INFO, 20);
         break;
     case SHAKE_INFO:
@@ -328,6 +337,8 @@ net_state(struct peer *p, const char *buf)
                 goto bad;
             p->n = tp->net;
             peer_send(p, nb_create_shake(tp));
+            if (p->dht_enabled == 1)
+                peer_send(p, nb_create_port());
         } else if (bcmp(buf, p->n->tp->tl->hash, 20) != 0)
             goto bad;
         peer_set_in_state(p, SHAKE_ID, 20);

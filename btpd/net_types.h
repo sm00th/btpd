@@ -87,6 +87,9 @@ struct peer {
         size_t off;
     } in;
 
+    int dht_enabled;
+    uint16_t dht_port;
+
     BTPDQ_ENTRY(peer) p_entry;
     BTPDQ_ENTRY(peer) ul_entry;
     BTPDQ_ENTRY(peer) rq_entry;

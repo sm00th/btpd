@@ -10,6 +10,7 @@
 #define NB_REQUEST      6
 #define NB_PIECE        7
 #define NB_CANCEL       8
+#define NB_PORT         9
 #define NB_TORRENTDATA  10
 #define NB_MULTIHAVE    11
 #define NB_BITDATA      12
@@ -50,6 +51,7 @@ struct net_buf *nb_create_interest(void);
 struct net_buf *nb_create_bitfield(struct torrent *tp);
 struct net_buf *nb_create_bitdata(struct torrent *tp);
 struct net_buf *nb_create_shake(struct torrent *tp);
+struct net_buf *nb_create_port(void);
 
 int nb_torrentdata_fill(struct net_buf *nb, struct torrent *tp, uint32_t index,
     uint32_t begin, uint32_t length);
