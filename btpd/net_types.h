@@ -87,6 +87,9 @@ struct peer {
         size_t off;
     } in;
 
+    struct sockaddr_storage addr;
+    socklen_t addrlen;
+
     int dht_enabled;
     uint16_t dht_port;
 

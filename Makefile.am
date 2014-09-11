@@ -23,6 +23,7 @@ btpd_btpd_SOURCES=\
 	btpd/thread_cb.c btpd/tlib.c btpd/tlib.h btpd/torrent.c btpd/torrent.h\
 	btpd/tracker_req.c btpd/tracker_req.h\
 	btpd/upload.c btpd/upload.h\
+	btpd/dht.c btpd/dht.h \
 	btpd/util.c
 btpd_btpd_CFLAGS=@TD_CFLAGS@ $(AM_CFLAGS)
 btpd_btpd_LDADD=@TD_LIBS@ misc/libmisc.a evloop/libevloop.a -lcrypto -lm @CLOCKLIB@ @INETLIBS@

@@ -388,6 +388,8 @@ peer_create_out_compact(struct net *n, int family, const char *compact)
 
     p = peer_create_common(sd);
     p->n = n;
+    p->addr = addr;
+    p->addrlen = addrlen;
     peer_send(p, nb_create_shake(n->tp));
 }
 

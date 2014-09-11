@@ -276,6 +276,7 @@ net_dispatch_msg(struct peer *p, const char *buf)
     case MSG_PORT:
         p->dht_port = dec_be16(buf);
         length = p->in.msg_len - 2;
+        dht_query_ping(p);
         break;
     default:
         abort();
